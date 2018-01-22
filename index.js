@@ -33,16 +33,18 @@ async function run(starter) {
 
   async function shutdown() {
     app.logger.info('Shutting down gracefully');
+
     // Run all the cleaners before shutting down
-    if (cleaners.length > 0) {
-      await cleaners.reduce((res, cleaner) => res(app).then(() => cleaner));
-    }
+    await cleaners.reduce((res, cleaner) => (
+      res.then(() => cleaner())
+    ), Promise.resolve(null));
+
     process.nextTick(() => process.exit());
   }
 
   process.on('SIGINT', shutdown);
   process.on('SIGTERM', shutdown);
-};
+}
 
 exports.default = run;
 module.exports = run;

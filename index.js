@@ -1,6 +1,6 @@
 const cleaners = [];
 
-module.exports = async function setup(starter) {
+async function run(starter) {
   const args = process.argv.slice(2);
   const config = {};
 
@@ -41,3 +41,6 @@ module.exports = async function setup(starter) {
   process.on('SIGINT', shutdown);
   process.on('SIGTERM', shutdown);
 };
+
+exports.default = run;
+module.exports = run;

@@ -34,7 +34,9 @@ async function run(starter) {
   async function shutdown() {
     app.logger.info('Shutting down gracefully');
     // Run all the cleaners before shutting down
-    await cleaners.reduce((res, cleaner) => res(app).then(() => cleaner));
+    if (cleaners.length > 0) {
+      await cleaners.reduce((res, cleaner) => res(app).then(() => cleaner));
+    }
     process.nextTick(() => process.exit());
   }
 

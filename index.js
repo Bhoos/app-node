@@ -24,13 +24,6 @@ async function run(starter) {
     },
   };
 
-  try {
-    await starter(app);
-  } catch (e) {
-    app.logger.error(e);
-    return;
-  }
-
   async function shutdown() {
     app.logger.info('Shutting down gracefully');
 
@@ -40,6 +33,16 @@ async function run(starter) {
     ), Promise.resolve(null));
 
     process.nextTick(() => process.exit());
+  }
+
+  try {
+    await starter(app);
+  } catch (e) {
+    app.logger.error(e);
+
+    // Perform a shutdown
+    shutdown();
+    return;
   }
 
   process.on('SIGINT', shutdown);

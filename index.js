@@ -35,6 +35,9 @@ async function run(starter) {
     process.nextTick(() => process.exit());
   }
 
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
+
   try {
     await starter(app);
   } catch (e) {
@@ -42,11 +45,7 @@ async function run(starter) {
 
     // Perform a shutdown
     shutdown();
-    return;
   }
-
-  process.on('SIGINT', shutdown);
-  process.on('SIGTERM', shutdown);
 }
 
 exports.default = run;

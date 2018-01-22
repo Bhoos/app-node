@@ -1,6 +1,6 @@
 {
   "name": "app-node",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A simple node app life cycle manager",
   "main": "index.js",
   "scripts": {

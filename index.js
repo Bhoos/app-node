@@ -15,6 +15,10 @@ async function run(starter) {
 
     get: name => config[name],
 
+    configure(obj) {
+      Object.assign(this, obj);
+    },
+
     addExitHandler: (cleaner) => {
       cleaners.unshift(cleaner);
     },

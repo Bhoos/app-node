@@ -1,3 +1,6 @@
+# DEPRECATED
+Use `@bhoos/node-app` instead
+
 # app-node
 A simple node app life cycle manager with graceful shutdown behaviour.
 Works with ES6 only (Node version 6 or more).
